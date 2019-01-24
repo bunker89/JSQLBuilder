@@ -69,7 +69,6 @@ public class SelectQueryBuilder {
 		if (terms.size() <= 0) {
 			for (JoinQueryBuilder j : joinList) {
 				String joinSelect = j.getTerm();
-				System.out.println(joinSelect);
 				if (joinSelect != null && !joinSelect.equals("")) {
 					hasTerm = true;
 					break;
