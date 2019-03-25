@@ -21,6 +21,8 @@ public abstract class WriteQueryBuilder {
 	public abstract WriteQueryBuilder insertField(String field, String value);
 
 	public WriteQueryBuilder insertFieldWrap(String field, String value) {
+		if (value != null)
+			value = value.replace("'", "\'\'");
 		return insertField(field, wrapString(value));
 	}
 
