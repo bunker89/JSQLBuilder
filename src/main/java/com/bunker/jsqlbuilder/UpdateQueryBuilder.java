@@ -4,6 +4,7 @@ public class UpdateQueryBuilder extends WriteQueryBuilder {
 	private String mQuery;
 	private String mSearch;
 	private boolean isFirstSet = true;
+	private String from = null;
 
 	public UpdateQueryBuilder(String table,String search) {
 		mQuery = "update " + table + " set ";
@@ -23,7 +24,14 @@ public class UpdateQueryBuilder extends WriteQueryBuilder {
 		return this;
 	}
 	
+	public UpdateQueryBuilder insertFrom(SelectQueryBuilder selectBuilder) {
+		this.from = "(" + selectBuilder.build() + ")";
+		return this;
+	}
+	
 	public String build() {
+		if (from != null) 
+			mQuery += " from " + from;
 		mQuery += " where ";
 		return mQuery + mSearch;
 	}

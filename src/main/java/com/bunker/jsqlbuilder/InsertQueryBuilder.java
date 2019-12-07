@@ -16,8 +16,8 @@ public class InsertQueryBuilder extends WriteQueryBuilder {
 		}
 	}
 
-	public InsertQueryBuilder(String queryBase) {
-		query = queryBase;
+	public InsertQueryBuilder(String table) {
+		query = "insert into " + table;
 	}
 
 	public InsertQueryBuilder insertField(String field, String value) {

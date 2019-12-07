@@ -102,6 +102,7 @@ public class SelectQueryBuilder {
 		JoinQueryBuilder jQuery = new JoinQueryBuilder("join", "j_table", "j");
 		jQuery.insertRead("j.*");
 		jQuery.insertTerm("j.abc=s.abc");
+		jQuery.insertTerm("j.bc=s.bc");
 		jQuery.insertOn("j.1");
 		
 		SelectQueryBuilder selectQuery = new SelectQueryBuilder("s_table", "s.*", "s");
