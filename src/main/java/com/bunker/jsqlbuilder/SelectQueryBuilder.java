@@ -58,7 +58,7 @@ public class SelectQueryBuilder {
 		query += createTerms();
 		
 		if (last != null)
-			query += last;
+			query +=  " " + last;
 		return query;
 	}
 	
@@ -81,18 +81,18 @@ public class SelectQueryBuilder {
 		if (!hasTerm)
 			return query;
 
-		query += " where ";
+		query += " where";
 
 		if (terms.size() > 0) {
-			query += terms.remove(0) + " ";
+			query += " " + terms.remove(0);
 		}
 		for (String s : terms) {
-			query += "and " + s + " ";
+			query += " and " + s;
 		}
 		for (JoinQueryBuilder j : joinList) {
 			String joinSelect = j.getTerm();
 			if (joinSelect != null && !joinSelect.equals("")) {
-				query += "and " + joinSelect + " ";
+				query += " and " + joinSelect;
 			}
 		}
 		return query;
@@ -106,9 +106,10 @@ public class SelectQueryBuilder {
 		jQuery.insertOn("j.1");
 		
 		SelectQueryBuilder selectQuery = new SelectQueryBuilder("s_table", "s.*", "s");
-		selectQuery.insertTerm("a=3 and b=4");
+		selectQuery.insertTerm("a=3");
 		selectQuery.insertTerm("c=5");
 		selectQuery.insertLast("last");
+		selectQuery.insertJoin(jQuery);
 		selectQuery.insertJoin(jQuery);
 		System.out.println(selectQuery.build());
 	}
