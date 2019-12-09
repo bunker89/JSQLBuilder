@@ -10,7 +10,7 @@ public class JoinQueryBuilder {
 	private List<String> on = new LinkedList<>();
 
 	public JoinQueryBuilder(String joinType, String table, String name) {
-		query = joinType + " " + table + " ";
+		query = " " + joinType + " " + table + " ";
 		if (name != null && !name.equals("")) {
 			query += "as " + name + " ";
 		}
