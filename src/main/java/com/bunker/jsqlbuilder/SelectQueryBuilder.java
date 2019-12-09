@@ -81,7 +81,7 @@ public class SelectQueryBuilder {
 		if (!hasTerm)
 			return query;
 
-		query += "where ";
+		query += " where ";
 
 		if (terms.size() > 0) {
 			query += terms.remove(0) + " ";
