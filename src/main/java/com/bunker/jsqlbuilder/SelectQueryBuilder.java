@@ -43,7 +43,7 @@ public class SelectQueryBuilder {
 		//테이블 과 별명 정의
 		query += "from " + table;		
 		if (name != null && !name.equals("")) {
-			query += "as " + name;
+			query += " as " + name;
 		}
 
 		//조인들 적용
@@ -109,7 +109,6 @@ public class SelectQueryBuilder {
 		selectQuery.insertTerm("a=3 and b=4");
 		selectQuery.insertTerm("c=5");
 		selectQuery.insertLast("last");
-		selectQuery.insertJoin(jQuery);
 		selectQuery.insertJoin(jQuery);
 		System.out.println(selectQuery.build());
 	}
