@@ -5,7 +5,7 @@ import java.util.List;
 
 public class JoinQueryBuilder {
 	private String query;
-	private String read;
+	private List<String> reads = new LinkedList<>();
 	private List<String> terms = new LinkedList<>();
 	private List<String> on = new LinkedList<>();
 
@@ -17,7 +17,7 @@ public class JoinQueryBuilder {
 	}
 	
 	public JoinQueryBuilder insertRead(String read) {
-		this.read = read;
+		reads.add(read);
 		return this;
 	}
 
@@ -36,31 +36,42 @@ public class JoinQueryBuilder {
 	}
 	
 	public String getRead() {
-		return read;
+		StringBuilder builder = new StringBuilder();
+		if (reads.size() > 0) {
+			builder.append(reads.get(0));
+		}
+		
+		for (int i = 1; i < reads.size(); i++) {
+			builder.append(",");
+			builder.append(reads.get(i));
+		}
+		return builder.toString();
 	}
 
 	public String getTerm() {
 		String term = null;
 		if (terms.size() > 0) {
-			term = terms.remove(0);
+			term = terms.get(0);
 		}
-		for (String s : terms) {
-			term += " and " + s;
+		for (int i = 1; i < terms.size(); i++) {
+			term += " and " + terms.get(i);
 		}
 		return term;
 	}
 
 	public String getJoinQuery() {
+		String query = this.query;
 		if (on.size() > 0)
-			query += "on " + on.remove(0);
+			query += "on " + on.get(0);
 		
-		for (String s : on) {
-			query += " and " + s;
+		for (int i = 1; i < on.size(); i++) {
+			query += " and " + on.get(i);
 		}
 		return query;
 	}
 	
 	public static void main(String args[]) {
-		
+		StringBuilder builder = new StringBuilder();
+		System.out.println(builder.toString());
 	}
 }

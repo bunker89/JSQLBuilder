@@ -36,7 +36,7 @@ public class SelectQueryBuilder {
 		for (JoinQueryBuilder j : joinList) {
 			String read = j.getRead();
 			if (read != null && !read.equals("")) {
-				query += "," + j.getRead() + " ";
+				query += "," + read + " ";
 			}
 		}
 
@@ -101,15 +101,16 @@ public class SelectQueryBuilder {
 	public static void main(String []args) {
 		JoinQueryBuilder jQuery = new JoinQueryBuilder("join", "j_table", "j");
 		jQuery.insertRead("j.*");
+		jQuery.insertRead("j.*");
 		jQuery.insertTerm("j.abc=s.abc");
 		jQuery.insertTerm("j.bc=s.bc");
 		jQuery.insertOn("j.1");
+		jQuery.insertOn("j.2");
 		
 		SelectQueryBuilder selectQuery = new SelectQueryBuilder("s_table", "s.*", "s");
 		selectQuery.insertTerm("a=3");
 		selectQuery.insertTerm("c=5");
 		selectQuery.insertLast("last");
-		selectQuery.insertJoin(jQuery);
 		selectQuery.insertJoin(jQuery);
 		System.out.println(selectQuery.build());
 	}
