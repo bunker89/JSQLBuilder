@@ -8,6 +8,10 @@ public class FloatBinder extends Binder {
 		super(field);
 	}
 
+	public FloatBinder(String fieldName, String bindName) {
+		super(fieldName, bindName);
+	}
+
 	@Override
 	public Float bind(ResultSet set) throws SQLException {
 		return set.getFloat(getFieldName());

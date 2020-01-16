@@ -8,6 +8,10 @@ public class StringBinder extends Binder {
 		super(field);
 	}
 
+	public StringBinder(String fieldName, String bindName) {
+		super(fieldName, bindName);
+	}
+
 	@Override
 	public String bind(ResultSet set) throws SQLException {
 		return set.getString(getFieldName());

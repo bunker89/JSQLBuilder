@@ -8,8 +8,13 @@ public class DoubleBinder extends Binder {
 		super(field);
 	}
 
+	public DoubleBinder(String fieldName, String bindName) {
+		super(fieldName, bindName);
+	}
+	
 	@Override
 	public Double bind(ResultSet set) throws SQLException {
 		return set.getDouble(getFieldName());
 	}
+	
 }

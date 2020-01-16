@@ -8,6 +8,10 @@ public class LongBinder extends Binder {
 		super(field);
 	}
 
+	public LongBinder(String fieldName, String bindName) {
+		super(fieldName, bindName);
+	}
+	
 	@Override
 	public Long bind(ResultSet set) throws SQLException {
 		return set.getLong(getFieldName());

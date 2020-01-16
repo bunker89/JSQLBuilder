@@ -139,12 +139,12 @@ public class SelectQueryBuilder extends PreparedQueryBuilder {
 	public static void main(String []args) {
 		JoinQueryBuilder jQuery = new JoinQueryBuilder("join", "j_table", "j");	
 		jQuery.insertRead("j.*");
-		jQuery.insertRead("j.*", new IntBinder("field1"), new IntBinder("field2"));
+		jQuery.insertRead("j.*");
 		jQuery.insertTerm("2?", new IntSetter(2));
 		jQuery.insertTerm("1?", new IntSetter(1));
 		jQuery.insertOn("6?7?", new IntSetter(6), new IntSetter(7));
 		jQuery.insertOn("j.2");
-		SelectQueryBuilder selectQuery = new SelectQueryBuilder("s_table", "s.*", "s", new IntBinder("field3"), new IntBinder("field4"));
+		SelectQueryBuilder selectQuery = new SelectQueryBuilder("s_table", "s.*", "s");
 		selectQuery.insertTerm("4?5?", new IntSetter(4), new IntSetter(5));
 		selectQuery.insertTerm("3?", new IntSetter(3));
 		selectQuery.insertLast("last");
