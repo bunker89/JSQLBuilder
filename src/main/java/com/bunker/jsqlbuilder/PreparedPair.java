@@ -23,4 +23,12 @@ public class PreparedPair {
 	public String toString() {
 		return query;
 	}
+	
+	public String getQuery() {
+		return query;
+	}
+	
+	public List<PreparedSetter> getSetters () {
+		return setters;
+	}
 }
