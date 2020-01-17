@@ -7,7 +7,6 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import com.bunker.jsqlbuilder.binder.Binder;
-import com.bunker.jsqlbuilder.binder.IntBinder;
 import com.bunker.jsqlbuilder.setters.IntSetter;
 import com.bunker.jsqlbuilder.setters.PreparedSetter;
 
@@ -124,7 +123,7 @@ public class SelectQueryBuilder extends PreparedQueryBuilder {
 		
 		for (JoinQueryBuilder j : joinList) {
 			PreparedPair joinSelect = j.getTerm();
-			if (joinSelect != null && !joinSelect.equals("")) {
+			if (joinSelect.query != null && !joinSelect.query.equals("")) {
 				query += " and " + joinSelect.query;
 				newSetters.addAll(joinSelect.setters);
 			}
@@ -140,8 +139,6 @@ public class SelectQueryBuilder extends PreparedQueryBuilder {
 		JoinQueryBuilder jQuery = new JoinQueryBuilder("join", "j_table", "j");	
 		jQuery.insertRead("j.*");
 		jQuery.insertRead("j.*");
-		jQuery.insertTerm("2?", new IntSetter(2));
-		jQuery.insertTerm("1?", new IntSetter(1));
 		jQuery.insertOn("6?7?", new IntSetter(6), new IntSetter(7));
 		jQuery.insertOn("j.2");
 		SelectQueryBuilder selectQuery = new SelectQueryBuilder("s_table", "s.*", "s");
