@@ -16,7 +16,6 @@ public class SelectQueryBuilder extends PreparedQueryBuilder {
 	private List<PreparedPair> terms = new LinkedList<>();
 	private List<Binder> binders = new LinkedList<>();
 	
-	@SafeVarargs
 	public SelectQueryBuilder(String table, @Nullable String read, @Nullable String name, Binder...readBinders) {
 		this.table = table;
 		this.read = read;
@@ -31,6 +30,10 @@ public class SelectQueryBuilder extends PreparedQueryBuilder {
 				this.read += binder.getFieldName();
 			}
 		}
+	}
+	
+	public SelectQueryBuilder(String table, @Nullable String name, Binder...readBinders) {
+		this(table, null, name, readBinders);
 	}
 	
 	public SelectQueryBuilder insertTerm(String term, PreparedSetter...setters) {
@@ -94,7 +97,7 @@ public class SelectQueryBuilder extends PreparedQueryBuilder {
 		if (terms.size() <= 0) {
 			for (JoinQueryBuilder j : joinList) {
 				PreparedPair joinSelect = j.getTerm();
-				if (joinSelect != null && !joinSelect.query.equals("")) {
+				if (joinSelect.query != null && !joinSelect.query.equals("")) {
 					hasTerm = true;
 					break;
 				}
