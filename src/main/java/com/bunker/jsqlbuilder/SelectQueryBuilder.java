@@ -32,10 +32,6 @@ public class SelectQueryBuilder extends PreparedQueryBuilder {
 		}
 	}
 	
-	public SelectQueryBuilder(String table, @Nullable String name, Binder...readBinders) {
-		this(table, null, name, readBinders);
-	}
-	
 	public SelectQueryBuilder insertTerm(String term, PreparedSetter...setters) {
 		this.terms.add(new PreparedPair(term, Arrays.asList(setters)));
 		return this;
