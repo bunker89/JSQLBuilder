@@ -79,7 +79,8 @@ public class SelectQueryBuilder extends PreparedQueryBuilder {
 		//검색 조건들 적용
 		PreparedPair termPair = createTerms();
 		query += termPair.query;
-		newSetters.addAll(termPair.setters);
+		if (termPair.setters != null)
+			newSetters.addAll(termPair.setters);
 		
 		if (last != null)
 			query +=  " " + last;
@@ -138,13 +139,17 @@ public class SelectQueryBuilder extends PreparedQueryBuilder {
 		JoinQueryBuilder jQuery = new JoinQueryBuilder("join", "j_table", "j");	
 		jQuery.insertRead("j.*");
 		jQuery.insertRead("j.*");
+		jQuery.insertEqualOn("j.2", "a", "b");
 		jQuery.insertOn("6?7?", new IntSetter(6), new IntSetter(7));
-		jQuery.insertOn("j.2");
+		JoinQueryBuilder jQuery2 = new JoinQueryBuilder("join", "j_table", "j");	
+		jQuery2.insertRead("j.*");
+		jQuery2.insertRead("j.*");
+		jQuery2.insertEqualOn("j.2", "a", "b");
+		jQuery2.insertOn("6?7?", new IntSetter(6), new IntSetter(7));
 		SelectQueryBuilder selectQuery = new SelectQueryBuilder("s_table", "s.*", "s");
-		selectQuery.insertTerm("4?5?", new IntSetter(4), new IntSetter(5));
-		selectQuery.insertTerm("3?", new IntSetter(3));
 		selectQuery.insertLast("last");
 		selectQuery.insertJoin(jQuery);
+		selectQuery.insertJoin(jQuery2);
 		PreparedPair pair = selectQuery.build(); 
 		System.out.println(pair.query);
 		System.out.println(pair.setters);
