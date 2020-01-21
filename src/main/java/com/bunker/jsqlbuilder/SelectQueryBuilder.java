@@ -27,7 +27,7 @@ public class SelectQueryBuilder extends PreparedQueryBuilder {
 			if (this.read != null && !this.read.equals("")) {
 				this.read += "," + binder.getFieldName();
 			} else {
-				this.read += binder.getFieldName();
+				this.read = binder.getFieldName();
 			}
 		}
 	}
