@@ -19,6 +19,12 @@ public class InsertQueryBuilder extends WriteQueryBuilder {
 	public InsertQueryBuilder(String table) {
 		query = "insert into " + table;
 	}
+	
+	public InsertQueryBuilder(String table, boolean ignore) {
+		if (ignore) {
+			query = "insert ignore into " + table;
+		}
+	}
 
 	public InsertQueryBuilder insertField(String field, String value) {
 		if (field != null && value != null)
