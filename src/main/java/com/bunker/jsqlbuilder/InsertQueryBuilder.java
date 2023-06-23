@@ -8,6 +8,8 @@ public class InsertQueryBuilder extends WriteQueryBuilder {
 	private List<Data> list = new ArrayList<Data>();
 	private SelectQueryBuilder selectBuilder;
 
+	private String last;
+
 	private class Data {
 		String field, value;
 		Data (String field, String value) {
@@ -17,12 +19,14 @@ public class InsertQueryBuilder extends WriteQueryBuilder {
 	}
 
 	public InsertQueryBuilder(String table) {
-		query = "insert into " + table;
+		this(table, false);
 	}
 	
 	public InsertQueryBuilder(String table, boolean ignore) {
 		if (ignore) {
-			query = "insert ignore into " + table;
+			query = "insert ignore into " + table + " ";
+		} else {
+			query = "insert into " + table + " ";
 		}
 	}
 
@@ -60,6 +64,10 @@ public class InsertQueryBuilder extends WriteQueryBuilder {
 			query += ")";
 		}
 
+		if (last != null) {
+			query += " " + last;
+		}
+
 		return query;
 	}
 
@@ -67,5 +75,26 @@ public class InsertQueryBuilder extends WriteQueryBuilder {
 	public InsertQueryBuilder insertField(String field) {
 		insertField(field, "");
 		return this;
+	}
+
+	public void setLast(String []fields, String additional) {
+		if (fields.length == 0) {
+			return;
+		}
+		StringBuilder lastBuilder = new StringBuilder("ON DUPLICATE KEY UPDATE ");
+		for (int i = 0; i < fields.length; i++) {
+			if (i != 0) {
+				lastBuilder.append(",");
+			}
+			lastBuilder.append(fields[i] + "=VALUES(" + fields[i] + ")");
+		}
+		if (additional != null) {
+			lastBuilder.append("," + additional);
+		}
+		last = lastBuilder.toString();
+	}
+
+	public void setLast(String last) {
+		this.last = last;
 	}
 }
